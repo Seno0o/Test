@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-        }
-        h1 {
-            color: #333;
-        }
-        #message {
-            color: #4CAF50;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toncoin Price Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+    h1, h2 {
+      color: #333;
+      text-align: center;
+    }
+    #price {
+      font-size: 2em;
+      color: #4CAF50;
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <h1>GitHub Pages Test</h1>
-        <p id="message">Testing...</p>
-    </div>
-    <script>
-        document.getElementById("message").textContent = "Your GitHub Page is live and working!";
-    </script>
+  <div>
+    <h1>Toncoin Price Checker</h1>
+    <h2>Current Price of Toncoin (TON):</h2>
+    <p id="price">Loading...</p>
+  </div>
+
+  <script>
+    async function fetchToncoinPrice() {
+      try {
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=toncoin&vs_currencies=usd");
+        const data = await response.json();
+        const price = data.toncoin.usd;
+        
+        document.getElementById("price").textContent = `$${price}`;
+      } catch (error) {
+        document.getElementById("price").textContent = "Error loading price";
+        console.error("Error fetching Toncoin price:", error);
+      }
+    }
+
+    // Fetch price initially
+    fetchToncoinPrice();
+
+    // Refresh price every minute
+    setInterval(fetchToncoinPrice, 60000);
+  </script>
 </body>
 </html>
