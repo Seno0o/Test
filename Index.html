@@ -12,42 +12,45 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
-      background-color: #e0f7fa;
-      color: #333;
+      background-color: #121212;
+      color: #fff;
       overflow: hidden;
+      flex-direction: column;
+      text-align: center;
     }
 
     h1 {
-      font-size: 2.5rem;
-      color: #00796b;
-      margin-bottom: 0.5rem;
-      animation: fadeIn 1.5s ease-in-out;
+      font-size: 3rem;
+      color: #66bb6a;
+      margin-bottom: 20px;
+      animation: slideIn 2s ease-out;
     }
 
     h2 {
-      font-size: 1.5rem;
-      color: #00796b;
-      animation: fadeIn 1.5s ease-in-out 0.5s;
+      font-size: 1.8rem;
+      color: #bdbdbd;
+      animation: slideIn 2s ease-out 0.5s;
     }
 
     #time {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #004d40;
-      animation: fadeIn 1.5s ease-in-out 1s;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #81c784;
+      animation: fadeIn 2s ease-out 1s;
     }
 
     .loading {
       font-size: 1.5rem;
-      color: #004d40;
-      animation: fadeIn 1.5s ease-in-out 0.5s;
+      color: #cfd8dc;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-out 0.5s;
     }
 
-    /* Animation for fading in text */
-    @keyframes fadeIn {
+    /* Complex animations */
+    @keyframes slideIn {
       0% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(50px);
       }
       100% {
         opacity: 1;
@@ -55,31 +58,54 @@
       }
     }
 
-    /* Animation for spinning circle */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Glowing spinner animation */
     .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #00796b;
+      border: 5px solid #121212;
+      border-top: 5px solid #66bb6a;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
+      width: 60px;
+      height: 60px;
+      animation: spin 1.5s linear infinite, glow 1.5s ease-in-out infinite;
       margin-bottom: 20px;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 10px #66bb6a, 0 0 20px #66bb6a, 0 0 30px #66bb6a;
+      }
+      50% {
+        box-shadow: 0 0 20px #81c784, 0 0 30px #81c784, 0 0 40px #81c784;
+      }
+      100% {
+        box-shadow: 0 0 10px #66bb6a, 0 0 20px #66bb6a, 0 0 30px #66bb6a;
+      }
     }
 
   </style>
 </head>
 <body>
-  <div>
-    <h1>Current Time in Malaysia (MYT)</h1>
-    <div class="spinner"></div>
-    <p class="loading">Loading time...</p>
-    <h2 id="time">Loading...</h2> <!-- Time will be updated here -->
-  </div>
+  <h1>Current Time in Malaysia (MYT)</h1>
+  <div class="spinner"></div>
+  <p class="loading">Fetching time...</p>
+  <h2 id="time">Loading...</h2> <!-- Time will be updated here -->
 
   <script>
     function updateTime() {
