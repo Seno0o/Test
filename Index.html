@@ -6,27 +6,78 @@
   <title>Current Time in Malaysia</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
       margin: 0;
-      background-color: #f4f4f9;
-    }
-    h1, h2 {
+      background-color: #e0f7fa;
       color: #333;
-      text-align: center;
+      overflow: hidden;
     }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #00796b;
+      margin-bottom: 0.5rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #00796b;
+      animation: fadeIn 1.5s ease-in-out 0.5s;
+    }
+
     #time {
-      font-size: 2em;
-      color: #4CAF50;
+      font-size: 3rem;
+      font-weight: bold;
+      color: #004d40;
+      animation: fadeIn 1.5s ease-in-out 1s;
     }
+
+    .loading {
+      font-size: 1.5rem;
+      color: #004d40;
+      animation: fadeIn 1.5s ease-in-out 0.5s;
+    }
+
+    /* Animation for fading in text */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Animation for spinning circle */
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #00796b;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
   </style>
 </head>
 <body>
   <div>
     <h1>Current Time in Malaysia (MYT)</h1>
+    <div class="spinner"></div>
+    <p class="loading">Loading time...</p>
     <h2 id="time">Loading...</h2> <!-- Time will be updated here -->
   </div>
 
@@ -44,11 +95,14 @@
       document.getElementById("time").textContent = malaysiaTime;
     }
 
-    // Update time immediately
-    updateTime();
-
-    // Update time every second
-    setInterval(updateTime, 1000);
+    // Simulate a small delay before loading time
+    setTimeout(function() {
+      // Hide loading text and spinner, then show time
+      document.querySelector('.loading').style.display = 'none';
+      document.querySelector('.spinner').style.display = 'none';
+      updateTime();
+      setInterval(updateTime, 1000); // Update time every second
+    }, 1000); // Delay of 1 second before showing the time
   </script>
 </body>
 </html>
