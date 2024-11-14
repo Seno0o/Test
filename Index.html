@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Previewer</title>
+    <title>Chat Viewer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 id="title">Chat Previewer</h1>
+            <h1 id="title">Chat Viewer</h1>
             <select id="languageSelect" onchange="changeLanguage()">
                 <option value="en">English</option>
                 <option value="es">Español</option>
@@ -17,10 +17,13 @@
         </header>
 
         <div class="columns">
+            <!-- Safe Chats Column -->
             <div class="column" id="safeChatsColumn">
                 <h2 id="safeChatsTitle">Safe Chats ✅️</h2>
                 <ul id="safeChatsList"></ul>
             </div>
+            
+            <!-- Targeted Chats Column -->
             <div class="column" id="targetedChatsColumn">
                 <h2 id="targetedChatsTitle">Targeted Chats ❌️</h2>
                 <ul id="targetedChatsList"></ul>
