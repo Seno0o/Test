@@ -1,27 +1,31 @@
-document.getElementById("linkForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
+async function fetchPreview() {
+    const linkInput = document.getElementById('linkInput').value;
+    const preview = document.getElementById('preview');
+
+    // Example API endpoint - replace `YOUR_API_KEY` with an actual key if needed
+    const apiUrl = `https://api.linkpreview.net/?key=3b5a0dd9125f3d8429bec9211b93f6c6&q=${encodeURIComponent(linkInput)}`;
     
-    const link = document.getElementById("linkInput").value;
-    const previewContent = document.getElementById("previewContent");
-
-    // Display loading message
-    previewContent.textContent = "Loading preview...";
-
-    // Fetch link metadata using an Open Graph API
     try {
-        const response = await fetch(`https://api.linkpreview.net/?key=your_api_key&q=${link}`);
+        const response = await fetch(apiUrl);
         const data = await response.json();
 
-        if (data.title && data.description) {
-            previewContent.innerHTML = `
-                <h3>${data.title}</h3>
-                <p>${data.description}</p>
-                <img src="${data.image}" alt="${data.title}" style="width:100%; border-radius: 10px;">
-            `;
-        } else {
-            previewContent.textContent = "No preview available for this link.";
+        if (data.error) {
+            preview.innerHTML = `<p>Error: ${data.error}</p>`;
+            preview.style.display = 'block';
+            return;
         }
+
+        // Construct preview HTML
+        preview.innerHTML = `
+            <h3>${data.title}</h3>
+            <p>${data.description}</p>
+            <img src="${data.image}" alt="Preview image">
+            <a href="${data.url}" target="_blank">${data.url}</a>
+        `;
+        preview.style.display = 'block';
     } catch (error) {
-        previewContent.textContent = "Failed to load preview. Please check the link and try again.";
+        preview.innerHTML = `<p>Failed to fetch preview</p>`;
+        preview.style.display = 'block';
+        console.error("Error fetching preview:", error);
     }
-});
+}
