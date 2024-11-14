@@ -3,25 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime-Inspired Link Preview</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Link Previewer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Anime Link Preview</h1>
-        <p>Enter a link to preview below:</p>
-        
-        <form id="linkForm">
-            <input type="url" id="linkInput" placeholder="Enter a URL" required>
-            <button type="submit">Preview</button>
-        </form>
-
-        <div id="preview" class="preview">
-            <h2>Link Preview</h2>
-            <p id="previewContent">Your preview will appear here.</p>
-        </div>
+        <h1>Link Previewer</h1>
+        <input type="text" id="linkInput" placeholder="Enter a URL" />
+        <button onclick="fetchPreview()">Get Preview</button>
+        <div id="preview"></div>
     </div>
-    
     <script src="script.js"></script>
 </body>
 </html>
