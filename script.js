@@ -4,14 +4,14 @@ let language = 'en';
 // Translations for both languages
 const translations = {
     en: {
-        title: 'Chat Previewer',
+        title: 'Chat Viewer',
         safeChatsTitle: 'Safe Chats ✅️',
         targetedChatsTitle: 'Targeted Chats ❌️',
         safeChats: ['Chat 1', 'Chat 2', 'Chat 3'],
         targetedChats: ['Chat 4', 'Chat 5'],
     },
     es: {
-        title: 'Previsualizador de Chats',
+        title: 'Visor de Chats',
         safeChatsTitle: 'Chats Seguros ✅️',
         targetedChatsTitle: 'Chats Objetivos ❌️',
         safeChats: ['Chat 1', 'Chat 2', 'Chat 3'],
