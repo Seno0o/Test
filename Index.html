@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Previewer</title>
+    <title>Chat Previewer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Link Previewer</h1>
-        <input type="text" id="linkInput" placeholder="Enter a URL" />
-        <button onclick="fetchPreview()">Get Preview</button>
-        <div id="preview"></div>
+        <header>
+            <h1 id="title">Chat Previewer</h1>
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+            </select>
+        </header>
+
+        <div class="columns">
+            <div class="column" id="safeChatsColumn">
+                <h2 id="safeChatsTitle">Safe Chats ✅️</h2>
+                <ul id="safeChatsList"></ul>
+            </div>
+            <div class="column" id="targetedChatsColumn">
+                <h2 id="targetedChatsTitle">Targeted Chats ❌️</h2>
+                <ul id="targetedChatsList"></ul>
+            </div>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
