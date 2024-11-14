@@ -32,15 +32,18 @@ select {
     color: #fff;
     border: none;
     border-radius: 5px;
+    margin-top: 10px;
 }
 
 .columns {
     display: flex;
     justify-content: space-between;
+    gap: 20px; /* space between columns */
+    margin-top: 20px;
 }
 
 .column {
-    width: 45%;
+    width: 48%; /* Adjust to fit in two columns */
     background-color: #333;
     padding: 20px;
     border-radius: 8px;
