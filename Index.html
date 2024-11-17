@@ -3,34 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Viewer</title>
+    <title>Dynamic Number</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1 id="title">Chat Viewer</h1>
-            <select id="languageSelect" onchange="changeLanguage()">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-            </select>
-        </header>
-
-        <div class="columns">
-            <!-- Safe Chats Column -->
-            <div class="column" id="safeChatsColumn">
-                <h2 id="safeChatsTitle">Safe Chats ✅️</h2>
-                <ul id="safeChatsList"></ul>
-            </div>
-            
-            <!-- Targeted Chats Column -->
-            <div class="column" id="targetedChatsColumn">
-                <h2 id="targetedChatsTitle">Targeted Chats ❌️</h2>
-                <ul id="targetedChatsList"></ul>
-            </div>
-        </div>
+        <h1>Live Number</h1>
+        <div id="number">Loading...</div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
