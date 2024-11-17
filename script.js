@@ -6,7 +6,7 @@ import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.
 const firebaseConfig = {
     apiKey: "AIzaSyDuG9WFOKt7DCSzXxENMP1LAomTIiuJplI",
     authDomain: "page-ff79b.firebaseapp.com",
-    databaseURL: "https://page-ff79b-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    databaseURL: "https://page-ff79b.firebaseio.com/",  // Make sure this matches your Firebase Realtime Database URL
     projectId: "page-ff79b",
     storageBucket: "page-ff79b.appspot.com",
     messagingSenderId: "595869126328",
@@ -23,6 +23,9 @@ const numberRef = ref(db, 'number');
 // Listen for changes to the 'number' in Firebase and update the page
 onValue(numberRef, (snapshot) => {
     const number = snapshot.val();
-    // Update the page with the new number value
+    // Update the page with the new number value or fallback message
     document.getElementById('number').textContent = number ? number : "No number available";
+}, (error) => {
+    console.error("Error fetching data: ", error);
+    document.getElementById('number').textContent = "Failed to load number";
 });
