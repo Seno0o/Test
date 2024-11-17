@@ -1,3 +1,7 @@
+// Import the necessary Firebase modules (using Firebase v9+ modular SDK)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
 // Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDuG9WFOKt7DCSzXxENMP1LAomTIiuJplI",
@@ -10,14 +14,15 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-// Reference the number
-const numberRef = db.ref('number');
+// Reference the 'number' data in Firebase
+const numberRef = ref(db, 'number');
 
-// Listen for changes
-numberRef.on('value', (snapshot) => {
+// Listen for changes to the 'number' in Firebase and update the page
+onValue(numberRef, (snapshot) => {
     const number = snapshot.val();
-    document.getElementById('number').textContent = number;
+    // Update the page with the new number value
+    document.getElementById('number').textContent = number ? number : "No number available";
 });
