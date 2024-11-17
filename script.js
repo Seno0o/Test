@@ -6,7 +6,7 @@ import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.
 const firebaseConfig = {
     apiKey: "AIzaSyDuG9WFOKt7DCSzXxENMP1LAomTIiuJplI",
     authDomain: "page-ff79b.firebaseapp.com",
-    databaseURL: "https://page-ff79b.firebaseio.com",
+    databaseURL: "https://page-ff79b-default-rtdb.asia-southeast1.firebasedatabase.app/",
     projectId: "page-ff79b",
     storageBucket: "page-ff79b.appspot.com",
     messagingSenderId: "595869126328",
