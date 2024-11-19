@@ -1,35 +1,110 @@
-// Import necessary Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+// script.js
 
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDuG9WFOKt7DCSzXxENMP1LAomTIiuJplI",
-    authDomain: "page-ff79b.firebaseapp.com",
-    databaseURL: "https://page-ff79b-default-rtdb.asia-southeast1.firebasedatabase.app/",
-    projectId: "page-ff79b",
-    storageBucket: "page-ff79b.appspot.com",
-    messagingSenderId: "595869126328",
-    appId: "1:595869126328:web:cb68b72c7b91a697f0ae4d"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// Reference the 'number' data in Firebase
-const numberRef = ref(db, 'number');
-
-// Listen for changes to the 'number' in Firebase and update the page
-onValue(numberRef, (snapshot) => {
-    const number = snapshot.val();
-    console.log("Number value fetched from Firebase:", number);  // Log the value fetched
-    if (number !== null) {
-        document.getElementById('number').textContent = number;
-    } else {
-        document.getElementById('number').textContent = "No number available";
+// Fetch the .txt file from the GitHub repository
+async function fetchChatData() {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/username/repo/branch/file.txt'); // Replace with your GitHub raw file URL
+        const textData = await response.text();
+        return parseChatData(textData);
+    } catch (error) {
+        console.error("Error fetching chat data:", error);
     }
-}, (error) => {
-    console.error("Error fetching data: ", error);
-    document.getElementById('number').textContent = "Failed to load number";
-});
+}
+
+// Parse the chat data from the .txt file
+function parseChatData(data) {
+    const chats = [];
+    const entries = data.split(/\n(?=Title: )/);
+
+    entries.forEach(entry => {
+        const titleMatch = entry.match(/Title: (.+)/);
+        const linkMatch = entry.match(/NDC Link: (.+)/);
+        const authorMatch = entry.match(/Author: (.+) \(UID: (.+)\)/);
+        const coHosts = Array.from(entry.matchAll(/- (.+) \(UID: (.+)\)/g)).map(match => ({
+            name: match[1],
+            uid: match[2]
+        }));
+
+        if (titleMatch && linkMatch && authorMatch) {
+            chats.push({
+                title: titleMatch[1],
+                link: linkMatch[1],
+                author: {
+                    name: authorMatch[1],
+                    uid: authorMatch[2]
+                },
+                coHosts
+            });
+        }
+    });
+
+    return chats;
+}
+
+// Render the chat data to the webpage
+function renderChats(chats) {
+    const container = document.getElementById('chat-list');
+    container.innerHTML = '';
+
+    chats.forEach(chat => {
+        const chatCard = document.createElement('div');
+        chatCard.classList.add('chat-card');
+
+        const title = document.createElement('h2');
+        title.textContent = chat.title;
+        chatCard.appendChild(title);
+
+        const author = document.createElement('p');
+        author.textContent = `Host: ${chat.author.name}`;
+        chatCard.appendChild(author);
+
+        const viewDetails = document.createElement('button');
+        viewDetails.textContent = 'View Details';
+        viewDetails.addEventListener('click', () => {
+            renderChatDetails(chat);
+        });
+        chatCard.appendChild(viewDetails);
+
+        container.appendChild(chatCard);
+    });
+}
+
+// Render detailed information about a chat
+function renderChatDetails(chat) {
+    const detailsContainer = document.getElementById('chat-details');
+    detailsContainer.innerHTML = '';
+
+    const title = document.createElement('h2');
+    title.textContent = chat.title;
+    detailsContainer.appendChild(title);
+
+    const author = document.createElement('p');
+    author.textContent = `Host: ${chat.author.name} (UID: ${chat.author.uid})`;
+    detailsContainer.appendChild(author);
+
+    const link = document.createElement('a');
+    link.href = chat.link;
+    link.textContent = 'Go to Chat';
+    link.target = '_blank';
+    detailsContainer.appendChild(link);
+
+    const coHostsHeader = document.createElement('h3');
+    coHostsHeader.textContent = 'Co-hosts:';
+    detailsContainer.appendChild(coHostsHeader);
+
+    const coHostsList = document.createElement('ul');
+    chat.coHosts.forEach(coHost => {
+        const coHostItem = document.createElement('li');
+        coHostItem.textContent = `${coHost.name} (UID: ${coHost.uid})`;
+        coHostsList.appendChild(coHostItem);
+    });
+    detailsContainer.appendChild(coHostsList);
+}
+
+// Initialize the page
+(async function init() {
+    const chats = await fetchChatData();
+    if (chats) {
+        renderChats(chats);
+    }
+})();
