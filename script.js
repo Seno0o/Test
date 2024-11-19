@@ -3,7 +3,7 @@
 // Fetch the .txt file from the GitHub repository
 async function fetchChatData() {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/username/repo/branch/file.txt'); // Replace with your GitHub raw file URL
+        const response = await fetch('https://github.com/Seno0o/Test/blob/3001146c1936334736f6c27cc413b49461a373c3/chat_details.txt'); // Replace with your GitHub raw file URL
         const textData = await response.text();
         return parseChatData(textData);
     } catch (error) {
