@@ -15,8 +15,8 @@
         }
 
         :root {
-            --primary-color: #5b21b6; /* Darker primary color */
-            --secondary-color: #7e22ce; /* Darker secondary color */
+            --primary-color: #1d4ed8; /* Change to a blue shade */
+            --secondary-color: #3b82f6; /* Light blue shade */
             --background-dark: #0a0e16; /* Darker background */
             --card-bg: rgba(15, 20, 25, 0.9); /* Darker card background */
             --text-primary: #e2e8f0;
@@ -48,14 +48,16 @@
             text-align: center;
             margin-bottom: 2rem;
             opacity: 0;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); /* Gradient background */
+            padding: 1rem; /* Add padding */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 2px 10px var(--shadow-color); /* Box shadow */
         }
 
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            color: #fff; /* White text color */
         }
 
         #loader {
