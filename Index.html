@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Number</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Firebase SDK Import for v9+ modular SDK -->
-    <script type="module" src="script.js"></script>
+    <title>Chat Viewer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Live Number</h1>
-        <div id="number">Loading...</div>
+        <header>
+            <h1>Chat Viewer</h1>
+        </header>
+
+        <main>
+            <section id="chat-list" class="chat-list">
+                <!-- Chat cards will be dynamically rendered here -->
+            </section>
+
+            <section id="chat-details" class="chat-details">
+                <!-- Chat details will be dynamically rendered here -->
+                <h2>Chat Details</h2>
+                <p>Select a chat to view its details</p>
+            </section>
+        </main>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
