@@ -233,7 +233,8 @@
     <script>
         async function fetchChatData() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/Seno0o/Test/628f9c4c32327c29468c171e305b5914097cf4bf/chat_details.txt');
+                // Updated URL to the new text file
+                const response = await fetch('https://raw.githubusercontent.com/Seno0o/Test/ed1e1c77f427c1d172cb1d1041e2493af3c9d213/chat_details.txt');
                 const text = await response.text();
 
                 const chats = [];
